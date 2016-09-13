@@ -6,8 +6,8 @@
       .controller("LunchQuantityController", function($scope) {
          $scope.items = "";
          $scope.lunchQuantityMessage="";
-         $scope.messageStyle={color:'green'};
-         $scope.textboxStyle={'border-color':'green', 'border-width':'4px'};
+         $scope.messageStyle={};
+         $scope.textboxStyle={};
 
          $scope.checkLunchQuantity = function() {
            $scope.messageStyle={color:'green'};
