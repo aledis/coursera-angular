@@ -6,9 +6,18 @@
       .controller("LunchQuantityController", function($scope) {
          $scope.items = "";
          $scope.lunchQuantityMessage="";
+         $scope.messageStyle={color:'green'};
+         $scope.textboxStyle={'border-color':'green', 'border-width':'4px'};
 
          $scope.checkLunchQuantity = function() {
-           if ( isTooMuch($scope.items) ) {
+           $scope.messageStyle={color:'green'};
+           $scope.textboxStyle={'border-color':'green', 'border-width':'4px'};
+           if ( !$scope.items.trim() ) {
+             $scope.messageStyle = {color:'red'};
+             $scope.lunchQuantityMessage= "Please enter data first!";
+             $scope.textboxStyle={'border-color':'red', 'border-width': '4px'};
+           }
+           else if ( isTooMuch($scope.items) ) {
              $scope.lunchQuantityMessage= "Too much!";
            }
            else {
