@@ -28,7 +28,10 @@
 
     service.toBuyList = [ {name:"cookies", quantity:10},
                          {name:"chocolates", quantity:3},
-                         {name:"salami", quantity:2}];
+                         {name:"salami", quantity:2},
+                         {name:"moussaka", quantity:4},
+                         {name:"tiramisu", quantity:1 }
+                       ];
     service.boughtList = [];
 
     service.itemBought = function(index) {
