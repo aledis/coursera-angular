@@ -26,16 +26,29 @@
   function NarrowItDownController(MenuSearchService) {
     var ctrl = this;
     ctrl.searchText = "";
+    ctrl.nothingFound = false;
     ctrl.foundItems = [];
     ctrl.findMatchingItems = function() {
-      MenuSearchService.getMatchedMenuItems().then(function(result) {
-        ctrl.foundItems= [];
-        for ( var item in result ) {
-          if ( result[item].description.toLowerCase().includes(ctrl.searchText.toLowerCase())) {
-            ctrl.foundItems.push(result[item]);
+      if ( ctrl.searchText !== "") {
+        ctrl.noneFound = false;
+        MenuSearchService.getMatchedMenuItems().then(function(result) {
+          ctrl.foundItems= [];
+          for ( var item in result ) {
+            if ( result[item].description.toLowerCase().includes(ctrl.searchText.toLowerCase())) {
+              ctrl.foundItems.push(result[item]);
+            }
           }
-        }
-      });
+          ctrl.noneFound = ( ctrl.foundItems.length === 0);
+        });
+      }
+      else {
+        ctrl.foundItems= [];
+        ctrl.noneFound = true;
+      };
+    };
+
+    ctrl.nothingFound = function() {
+        return ctrl.noneFound;
     };
 
     ctrl.removeFound = function(index) {
@@ -50,7 +63,8 @@
       templateUrl: "founditems.html",
       scope: {
         foundItems: "<",
-        onRemove: "&"
+        onRemove: "&",
+        nothingFound: "&"
       }
     };
 
