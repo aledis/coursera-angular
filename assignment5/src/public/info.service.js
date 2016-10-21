@@ -12,11 +12,13 @@ function InfoService() {
     lastName: "",
     email: "",
     phone: "",
-    favorite: ""
+    favorite: "",
+    isset: false
   };
 
   service.saveInfo = function (info) {
     service.info = info;
+    service.info.isset = true;
   };
 
 

@@ -43,7 +43,9 @@ function routeConfig ($stateProvider) {
     })
     .state('public.signup', {
       url: '/signup',
-      templateUrl: 'src/public/signup/signup.html'
+      templateUrl: 'src/public/signup/signup.html',
+      controller: 'SignUpController',
+      controllerAs: 'signup'
     })
     .state('public.info', {
       url: '/info',
@@ -53,6 +55,13 @@ function routeConfig ($stateProvider) {
       resolve: {
         info: ['InfoService', function(InfoService) {
           return InfoService.getInfo();
+        }],
+        favoriteItem: ['MenuService','InfoService', function(MenuService,InfoService){
+          var info = InfoService.getInfo();
+          if ( info.favorite ) {
+            return MenuService.getItem(info.favorite);
+          };
+          return { short_name:"Not yet set"}
         }]
       }
     });

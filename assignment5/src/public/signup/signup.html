@@ -1,26 +1,50 @@
 <h2 class="text-center">Sign up here for the newsletter</h2>
 
 <div class="container">
-<form class="col-sm-4">
+<form name="signupForm" class="col-sm-4" novalidate>
 	<div class="form-group">
-		<label for="firstName">First Name:</label>
-		<input type="text" class="form-control" name="firstName">
+		<label for="lastName">First Name:</label>
+		<input type="text" class="form-control" name="firstName" ng-model="signup.info.firstName" required>
+		<span ng-if="signupForm.firstName.$error.required && signupForm.firstName.$touched" class="error">
+			First Name is required
+		</span>
 	</div>
 	<div class="form-group">
 		<label for="lastName">First Name:</label>
-		<input type="text" class="form-control" name="lastName">
+		<input type="text" class="form-control" name="lastName" ng-model="signup.info.lastName" required>
+		<span ng-if="signupForm.lastName.$error.required && signupForm.lastName.$touched" class="error">
+			Last Name is required
+		</span>
 	</div>
 	<div class="form-group">
 		<label for="Email">Email:</label>
-		<input type="text" class="form-control" name="Email">
+		<input type="email" class="form-control" name="email" ng-model="signup.info.email" required>
+		<span ng-if="signupForm.email.$error.email && signupForm.email.$touched" class="error">
+			Must be a valid email address: handle@domain format
+		</span>
+		<span ng-if="signupForm.email.$error.required && signupForm.email.$touched" class="error">
+			Email is required.
+		</span>
 	</div>
 	<div class="form-group">
 		<label for="phone">Phone:</label>
-		<input type="text" class="form-control" name="phone">
+		<input type="text" class="form-control" placeholder="###-###-####" name="phone" ng-model="signup.info.phone" pattern="(\d{3})-(\d{3})-(\d{4})" required>
+		<span ng-if="signupForm.phone.$error.pattern && signupForm.phone.$touched" class="error">
+			Phone must be in the format ###-###-####.
+		</span>
+		<span ng-if="signupForm.phone.$error.required && signupForm.phone.$touched" class="error">
+			Phone is required.
+		</span>
 	</div>
 	<div class="form-group">
 		<label for="favorite">Favorite Menu Item:</label>
-		<input type="text" class="form-control" name="favorite">
-	</div>		
+		<input type="text" class="form-control" name="favorite" ng-model="signup.info.favorite" favorite-item>
+		<span ng-if="signupForm.favorite.$touched && signupForm.favorite.$error.favoriteItem" class="error">
+			Menu item does not exist
+		</span>
+	</div>
+	<button
+          ng-disabled="signupForm.$invalid"
+          ng-click="signup.submit()">Submit</button>		
 </form>
 </div>

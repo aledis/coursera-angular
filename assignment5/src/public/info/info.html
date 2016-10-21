@@ -1,5 +1,5 @@
-<h2 class="text-center">Your info:</h1>
-<div class="container">
+<div class="container" ng-if="infoCtrl.info.isset">
+	<h2 class="text-center">Your info:</h1>
 	<div class="row">
 		<div class="col-sm-2">First Name:</div>
 		<div class="col-sm-4">{{infoCtrl.info.firstName}}</div>
@@ -20,4 +20,15 @@
 		<div class="col-sm-4">{{infoCtrl.info.phone}}</div>
 		<div class="col-sm-6"></div>
 	</div>
+	<div class="row" ng-if="infoCtrl.info.favorite">
+		<div class="col-sm-2">Favorite Menu item:</div>
+	</div>
+	<div class="row" ng-if="infoCtrl.info.favorite">
+		<menu-item
+             menu-item="infoCtrl.favoriteItem">
+  		</menu-item>
+	</div>
+</div>
+<div ng-hide="infoCtrl.info.isset">
+	<h2 class="text-center">Info is not yet set, please <a ui-sref="public.signup">sign up for newsletter</a></h2>
 </div>
