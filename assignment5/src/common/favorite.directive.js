@@ -2,14 +2,17 @@
 	angular.module('common')
 	.directive('favoriteItem', FavoriteItem);
 
-	FavoriteItem.$inject = ['MenuService'];
+	FavoriteItem.$inject = ['MenuService','$q'];
 
-	function FavoriteItem(MenuService) {
+	function FavoriteItem(MenuService, $q) {
 		return {
 			require: 'ngModel',
 			link: function(scope, elm, attrs, ctrl) {
 				ctrl.$asyncValidators.favoriteItem = function(modelValue,viewValue) {
-					return MenuService.getItem(modelValue);	
+					if ( modelValue ) {
+						return MenuService.getItem(modelValue);	
+					}
+					return $q.resolve(true);
 				};
 			}
 		};

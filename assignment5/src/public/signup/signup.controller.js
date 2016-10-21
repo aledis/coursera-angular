@@ -10,6 +10,7 @@
 
 		signup.submit = function() {
 			InfoService.saveInfo(signup.info);
+			signup.saved = true;
 		};
 	};
 })();
